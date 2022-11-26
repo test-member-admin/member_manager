@@ -15,13 +15,14 @@ jobs:
 #             -H "Accept: application/vnd.github+json" \
 #             -H "Authorization: Bearer ${{secrets.ORG_TOKEN}}" \
 #             https://api.github.com/orgs/test-member-admin/teams/a/memberships/jbusecke
+      
+      # testing child teams
       - name: Add members
         run: |
           curl \
             -X PUT \
             -H "Accept: application/vnd.github+json" \
             -H "Authorization: Bearer ${{ secrets.ORG_TOKEN }}" \
-            # testing child teams
             https://api.github.com/orgs/test-member-admin/teams/a/aa/memberships/julius-alias \
             -d '{"role":"member"}'
 
