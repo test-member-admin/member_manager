@@ -10,7 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: List members
-        run: curl \
+        run: | 
+           curl \
            -H "Accept: application/vnd.github+json" \
            -H "Authorization: Bearer ${{ secrets.ORG_TOKEN }}" \
            https://api.github.com/orgs/test-member-admin/teams/a/members
