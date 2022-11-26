@@ -9,9 +9,14 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: Get team role
+        run: | 
+          curl \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer ${{secrets.ORG_TOKEN}}" \
+            https://api.github.com/orgs/test-member-admin/teams/a/memberships/jbusecke
       - name: Add members
         run: |
-        
           curl \
             -X PUT \
             -H "Accept: application/vnd.github+json" \
