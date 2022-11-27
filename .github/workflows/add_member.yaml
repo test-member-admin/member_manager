@@ -12,6 +12,7 @@ jobs:
         shell: bash -l {0}
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
       - name: List members
         run: |
           while read p; do
