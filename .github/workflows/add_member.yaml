@@ -7,22 +7,24 @@ on:
 
 jobs:
   build:
+    defaults:
+      run:
+        shell: bash -l {0}
     runs-on: ubuntu-latest
     steps:
-#       - name: Get team role
-#         run: | 
-#           curl \
-#             -H "Accept: application/vnd.github+json" \
-#             -H "Authorization: Bearer ${{secrets.ORG_TOKEN}}" \
-#             https://api.github.com/orgs/test-member-admin/teams/a/memberships/jbusecke
-      
-      # testing child teams
+      - name: List members
+        run: |
+          while read p; do
+            echo "$p"
+          done < members.txt
       - name: Add members
         run: |
-          curl \
-            -X PUT \
-            -H "Accept: application/vnd.github+json" \
-            -H "Authorization: Bearer ${{ secrets.ORG_TOKEN }}" \
-            https://api.github.com/orgs/test-member-admin/teams/aa/memberships/julius-alias \
-            -d '{"role":"member"}'
+          while read p; do
+            curl \
+              -X PUT \
+              -H "Accept: application/vnd.github+json" \
+              -H "Authorization: Bearer ${{ secrets.ORG_TOKEN }}" \
+              https://api.github.com/orgs/test-member-admin/teams/aa/memberships/"$p" \
+              -d '{"role":"member"}'
+          done < members.txt
 
